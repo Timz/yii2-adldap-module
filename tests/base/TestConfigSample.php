@@ -12,11 +12,11 @@ class TestConfig {
                     'class' => 'yii\rbac\DbManager',
                 ],
                 'user' => [
-                    'identityClass' => 'Edvlerblog\Adldap2\model\UserDbLdap',
+                    'identityClass' => 'migcredit\Adldap2\model\UserDbLdap',
                     'enableAutoLogin' => true,
                 ],
                 'ad' => [
-                    'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
+                    'class' => 'migcredit\Adldap2\Adldap2Wrapper',
                     'providers' => [
                         'default' => [
                             'autoconnect' => true,

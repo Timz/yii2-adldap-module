@@ -1,11 +1,11 @@
-# yii2-adldap-module v6 (wrapper for Adldap2 v10)
+# yii2-adldap-module v6 (wrapper for Adldap2 v10)!
 [Yii2](http://www.yiiframework.com) extension for Adldap2 (https://packagist.org/packages/adldap2/adldap2)
 
-[![Latest Stable Version](https://poser.pugx.org/edvlerblog/yii2-adldap-module/v/stable)](https://packagist.org/packages/edvlerblog/yii2-adldap-module)
-[![Total Downloads](https://poser.pugx.org/edvlerblog/yii2-adldap-module/downloads)](https://packagist.org/packages/edvlerblog/yii2-adldap-module)
-[![Monthly Downloads](https://poser.pugx.org/edvlerblog/yii2-adldap-module/d/monthly)](https://packagist.org/packages/edvlerblog/yii2-adldap-module)
-[![Daily Downloads](https://poser.pugx.org/edvlerblog/yii2-adldap-module/d/daily)](https://packagist.org/packages/edvlerblog/yii2-adldap-module)
-[![License](https://poser.pugx.org/phpunit/phpunit/license)](https://packagist.org/packages/edvlerblog/yii2-adldap-module)
+[![Latest Stable Version](https://poser.pugx.org/migcredit/yii2-adldap-module/v/stable)](https://packagist.org/packages/migcredit/yii2-adldap-module)
+[![Total Downloads](https://poser.pugx.org/migcredit/yii2-adldap-module/downloads)](https://packagist.org/packages/migcredit/yii2-adldap-module)
+[![Monthly Downloads](https://poser.pugx.org/migcredit/yii2-adldap-module/d/monthly)](https://packagist.org/packages/migcredit/yii2-adldap-module)
+[![Daily Downloads](https://poser.pugx.org/migcredit/yii2-adldap-module/d/daily)](https://packagist.org/packages/migcredit/yii2-adldap-module)
+[![License](https://poser.pugx.org/phpunit/phpunit/license)](https://packagist.org/packages/migcredit/yii2-adldap-module)
 
 * Query Active Directory users, groups, computers, organizational units, ...
 * RBAC user model
@@ -84,7 +84,7 @@ It has been a long way since 29. Jan 2014, many functions has been added. I noti
 **The deep integration with [Method 2](#usage-method-2-deep-integration-into-the-yii2-framework-with-a-user-model)**
 * Sign in with a Active Directory User is possible **without doing anything in yii2**. The only action needed is creating a Active Directory User and add it to a group in Active Directory. 
 * Full support of the RBAC-concept from yii2
-* Default is to login with the sAMAccountName [Edvlerblog\Adldap2\model\UserDbLdap.php::findByUsername($username)](src/model/UserDbLdap.php). But using any attribute is possible [Edvlerblog\Adldap2\model\UserDbLdap.php::findByAttribute($attribute,$searchValue)](src/model/UserDbLdap.php).
+* Default is to login with the sAMAccountName [migcredit\Adldap2\model\UserDbLdap.php::findByUsername($username)](src/model/UserDbLdap.php). But using any attribute is possible [migcredit\Adldap2\model\UserDbLdap.php::findByAttribute($attribute,$searchValue)](src/model/UserDbLdap.php).
 * Default is, that on login the Active Directory Account status and the group assignments are checked. Based on the results the login is possible or not.
 * You can access every Active Directory attribute of the user. [Method 2](#usage-method-2-deep-integration-into-the-yii2-framework-with-a-user-model)
 * This yii2-extension is highly configurable.
@@ -108,11 +108,11 @@ The preferred way to install this extension is through [Composer](http://getcomp
 
 Either run
 ```
-php composer.phar require edvlerblog/yii2-adldap-module "^6.0.0"
+php composer.phar require migcredit/yii2-adldap-module "^6.0.0"
 ```
 or add
 ```
-"edvlerblog/yii2-adldap-module": "^6.0.0"
+"migcredit/yii2-adldap-module": "^6.0.0"
 ```
 to the require section of your composer.json
 
@@ -125,7 +125,7 @@ Add this code in your components section of the application configuration (eg. c
 	// other components ...
 	//.....
 	'ad' => [
-	    'class' => 'Edvlerblog\Adldap2\Adldap2Wrapper',
+	    'class' => 'migcredit\Adldap2\Adldap2Wrapper',
 
 	    /*
 	     * Set the default provider to one of the providers defined in the
@@ -333,7 +333,7 @@ if (!\Yii::$app->user->isGuest) {
 //...
 ```
 
-If you use the [Edvlerblog\Adldap2\model\UserDbLdap.php](src/model/UserDbLdap.php) class you can do things like login with a user into yii2 **without createing them** in yii2. Tasks like creating a user, assigning roles and check password against Active Directory all automatically done from [Edvlerblog\Adldap2\model\UserDbLdap.php](src/model/UserDbLdap.php) class.  
+If you use the [migcredit\Adldap2\model\UserDbLdap.php](src/model/UserDbLdap.php) class you can do things like login with a user into yii2 **without createing them** in yii2. Tasks like creating a user, assigning roles and check password against Active Directory all automatically done from [migcredit\Adldap2\model\UserDbLdap.php](src/model/UserDbLdap.php) class.  
 
 For example imagine the following:  
 - You create a user in Active Directory and assign this user to a group starting with **yii2_** (e.g. yii2_example_group).
@@ -398,7 +398,7 @@ Start the tests in windows with:
 // WARNING!! NOT RUN ON PRODUCTION!!
 // TABLES ARE TRUNCATED AND ACTIVE DIRECTORY IS MODIFIED!
 // TAKE A LOOK AT THE SOURCE CODE BEFORE RUNNING THE TESTS.
-cd vendor/edvlerblog/yii2-adldap-module
+cd vendor/migcredit/yii2-adldap-module
 ..\..\bin\phpunit -v --debug
 ..\..\bin\phpunit --testdox
 ```

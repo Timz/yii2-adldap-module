@@ -22,7 +22,7 @@ class UserModelTest extends TestCase
     
     // generic function to create user model used by test functions
     private function getNewUserModel() {
-        $ldapmodel = new Edvlerblog\Adldap2\model\UserDbLdap();
+        $ldapmodel = new migcredit\Adldap2\model\UserDbLdap();
         $ldapmodel->username = TestVariables::$TEST_USER_ACCOUNT_NAME;
         return $ldapmodel;
     }
@@ -41,14 +41,14 @@ class UserModelTest extends TestCase
     
     // test if a query with a disabled username returns null
     public function testFindByUsernameDisabledUser() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_DISABLED_USER);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_DISABLED_USER);
 
         $this->assertNull($userObject,'A disabled user cannot be returned by findByUsername');
     }
     
     // test if findByUsername returns the user
     public function testFindByUsername() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
         $userName = $userObject->queryLdapUserObject()['attributes']['samaccountname'][0];
         
         $this->assertEquals($userName,TestVariables::$TEST_USER_ACCOUNT_NAME,'No correct instance of the test user ' . TestVariables::$TEST_USER_ACCOUNT_NAME . ' returned by findByUsername');
@@ -56,15 +56,15 @@ class UserModelTest extends TestCase
     
     // test if query a non existing user id returns null
     public function testFindIdentityNotExistingUserId() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findIdentity(9999);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findIdentity(9999);
 
         $this->assertNull($userObject,'Not existing identity cannot be found!');
     }
     
     // test if user is found by id
     public function testFindIdentityWithId() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
-        $userObjectById = Edvlerblog\Adldap2\model\UserDbLdap::findIdentity($userObject->getId());
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
+        $userObjectById = migcredit\Adldap2\model\UserDbLdap::findIdentity($userObject->getId());
 
         $userName = $userObjectById->queryLdapUserObject()['attributes']['samaccountname'][0];
         
@@ -73,26 +73,26 @@ class UserModelTest extends TestCase
     
     // test a disabled user
     public function testUpdateAccountStatus() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
-        $userObject->status = Edvlerblog\Adldap2\model\UserDbLdap::STATUS_DISABLED;
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
+        $userObject->status = migcredit\Adldap2\model\UserDbLdap::STATUS_DISABLED;
         $userObject->save();
         
-        $this->assertEquals($userObject->status,Edvlerblog\Adldap2\model\UserDbLdap::STATUS_DISABLED, 'User should be disabled.');
+        $this->assertEquals($userObject->status,migcredit\Adldap2\model\UserDbLdap::STATUS_DISABLED, 'User should be disabled.');
         $userObject->updateAccountStatus();
         
-        $this->assertEquals($userObject->status,Edvlerblog\Adldap2\model\UserDbLdap::STATUS_ENABLED, 'User should be reenabled after updateAccountStatus.');
+        $this->assertEquals($userObject->status,migcredit\Adldap2\model\UserDbLdap::STATUS_ENABLED, 'User should be reenabled after updateAccountStatus.');
     }
 
     public function testCheckAllowedToLoginWithNullUser() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername('NOTEXISTINGACCOUNT');
-        $userObject2 = Edvlerblog\Adldap2\model\UserDbLdap::checkAllowedToLogin($userObject);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername('NOTEXISTINGACCOUNT');
+        $userObject2 = migcredit\Adldap2\model\UserDbLdap::checkAllowedToLogin($userObject);
         
         $this->assertEquals($userObject,$userObject2, 'The object returned for a successfull login by checkAllowedToLogin has to be euqal to the instance given as parameter');
     }   
     
     public function testCheckAllowedToLogin() {
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
-        $userObject2 = Edvlerblog\Adldap2\model\UserDbLdap::checkAllowedToLogin($userObject);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
+        $userObject2 = migcredit\Adldap2\model\UserDbLdap::checkAllowedToLogin($userObject);
         
         $this->assertEquals($userObject,$userObject2, 'The object returned for a successfull login by checkAllowedToLogin has to be euqal to the instance given as parameter');
     }
@@ -114,7 +114,7 @@ class UserModelTest extends TestCase
             $auth->addChild($yii2RoleTestGroup, $permTestUnit);         
         }
         
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByUsername(TestVariables::$TEST_USER_ACCOUNT_NAME);
         $yiiRolesAssignedToUser = Yii::$app->authManager->getRolesByUser($userObject->getId()); //Get all roles assigned to user
         
         //User has only group yii2_example_group assinged.
@@ -136,13 +136,13 @@ class UserModelTest extends TestCase
     
     public function testFindByAttribute() {
         //A query with more than one result sould return null
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByAttribute('countryCode',0);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByAttribute('countryCode',0);
         $this->assertNull($userObject,'A attribute which is not suitable for unique identification should return null');       
         
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByAttribute('displayName',TestVariables::$TEST_USER_DISPLAY_NAME);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByAttribute('displayName',TestVariables::$TEST_USER_DISPLAY_NAME);
         $userName = $userObject->queryLdapUserObject()['attributes']['samaccountname'][0];
         
-        $userObject = Edvlerblog\Adldap2\model\UserDbLdap::findByAttribute('samaccountname',TestVariables::$TEST_USER_ACCOUNT_NAME);
+        $userObject = migcredit\Adldap2\model\UserDbLdap::findByAttribute('samaccountname',TestVariables::$TEST_USER_ACCOUNT_NAME);
         $userName = $userObject->queryLdapUserObject()['attributes']['samaccountname'][0];
         
         $this->assertEquals($userName,TestVariables::$TEST_USER_ACCOUNT_NAME,'No correct instance of the test user ' . TestVariables::$TEST_USER_ACCOUNT_NAME . ' returned by findByUsername');        
@@ -163,7 +163,7 @@ class UserModelTest extends TestCase
         $idOfUser = Yii::$app->user->getId();      
         
         //Simulate a request after a successfull Login
-        $userObjectById = Edvlerblog\Adldap2\model\UserDbLdap::findIdentity($idOfUser);
+        $userObjectById = migcredit\Adldap2\model\UserDbLdap::findIdentity($idOfUser);
         $userName = $userObjectById->queryLdapUserObject()['attributes']['samaccountname'][0];
         $this->assertEquals($userName,TestVariables::$TEST_USER_ACCOUNT_NAME,'No correct instance of the test user ' . TestVariables::$TEST_USER_ACCOUNT_NAME . ' returned by queryLdapUserObject');
         

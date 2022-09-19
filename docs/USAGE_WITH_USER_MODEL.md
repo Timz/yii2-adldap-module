@@ -45,7 +45,7 @@ yii migrate --migrationPath=@yii/rbac/migrations
 ### 4. Apply UserDbLdap Migrations. Execute the following command on your shell or cmd
 ```
 cd C:\xampp\htdocs\basic
-yii migrate --migrationPath=@Edvlerblog/Adldap2/migrations
+yii migrate --migrationPath=@migcredit/Adldap2/migrations
 ```
 
 ### 5. Change the identity class in your web.conf (basic template) / main.conf (advanced template).
@@ -53,7 +53,7 @@ yii migrate --migrationPath=@Edvlerblog/Adldap2/migrations
 'components' => [
     //user entry already exists!
     'user' => [
-        'identityClass' => 'Edvlerblog\Adldap2\model\UserDbLdap',
+        'identityClass' => 'migcredit\Adldap2\model\UserDbLdap',
         //...
     ],
     //...
@@ -66,7 +66,7 @@ yii migrate --migrationPath=@Edvlerblog/Adldap2/migrations
 public function getUser()
 {
     if ($this->_user === false) {
-        $this->_user = \Edvlerblog\Adldap2\model\UserDbLdap::findByUsername($this->username);
+        $this->_user = \migcredit\Adldap2\model\UserDbLdap::findByUsername($this->username);
     }
 
     return $this->_user;
@@ -80,8 +80,8 @@ public function getUser()
 public function getUser()
 {
     if ($this->_user === false) {
-        $this->_user = \Edvlerblog\Adldap2\model\UserDbLdap::findByAttribute('userPrincipalName',$this->username); //With Principal Name
-        //$this->_user =\Edvlerblog\Adldap2\model\UserDbLdap::findByAttribute('mail',$this->username); //With Mail
+        $this->_user = \migcredit\Adldap2\model\UserDbLdap::findByAttribute('userPrincipalName',$this->username); //With Principal Name
+        //$this->_user =\migcredit\Adldap2\model\UserDbLdap::findByAttribute('mail',$this->username); //With Mail
     }
 
     return $this->_user;
@@ -95,7 +95,7 @@ Maybe the 'controllerMap' section is commented out.
 'controllerMap' => [
     //...
     'ldapcmd' => [
-        'class' => 'Edvlerblog\Adldap2\commands\LdapController',
+        'class' => 'migcredit\Adldap2\commands\LdapController',
     ],
     //...
 ],

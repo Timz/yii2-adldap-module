@@ -1,5 +1,5 @@
 {
-    "name": "edvlerblog/yii2-adldap-module",
+    "name": "migcredit/yii2-adldap-module",
     "description": "yii2 Active Directory implementation (wrapper for Adldap2)",
     "type": "yii2-extension",
     "keywords": ["microsoft","ldap","adldap","ad","active directory","yii2","yii2-extension","yii2-rbac","yii2-role-system","yii2-rbac-module"],
@@ -27,7 +27,7 @@
     },
     "autoload": {
         "psr-4" : {
-            "Edvlerblog\\Adldap2\\" : "src/"
+            "migcredit\\Adldap2\\" : "src/"
         }
     }
 }

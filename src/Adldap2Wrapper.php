@@ -13,7 +13,7 @@
  * @link https://github.com/edvler/yii2-adldap-module
  */
 
-namespace Edvlerblog\Adldap2;
+namespace migcredit\Adldap2;
 
 use yii\base\Component; //include YII component class
 use Adldap\Adldap; //include the Adldap class

@@ -13,7 +13,7 @@
  * @link https://github.com/edvler/yii2-adldap-module
  */
 
-namespace Edvlerblog\Adldap2\commands;
+namespace migcredit\Adldap2\commands;
 
 use Yii;
 use yii\console\Controller;
@@ -87,7 +87,7 @@ class LdapController extends Controller
             $c++;
             
             \Yii::warning("-- Working on user " . $userName . " --");
-            $userObject = \Edvlerblog\Adldap2\model\UserDbLdap::createOrRefreshUser($userName);
+            $userObject = \migcredit\Adldap2\model\UserDbLdap::createOrRefreshUser($userName);
             
             if ($userObject != null) {
                 \Yii::warning("User " . $userName . " created");
